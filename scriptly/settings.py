@@ -22,13 +22,8 @@ OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-print("====BASE_DIR====" + str(BASE_DIR))
-
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-print("====STATIC_URL====" + str(STATIC_URL))
-print("====STATIC_ROOT====" + str(STATIC_ROOT))
 
 
 # Quick-start development settings - unsuitable for production
@@ -41,7 +36,7 @@ SECRET_KEY = 'django-insecure-@8guaz85_8xl3uw&wf359no19tjom&_l93167(!jws#9te8d^#
 DEBUG = True
 
 ALLOWED_HOSTS = ['scriptly-105d4cc5ed46.herokuapp.com',
-                 'localhost', '127.0.0.1']
+                 'localhost', '127.0.0.1', '0.0.0.0']
 
 
 # Application definition

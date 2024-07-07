@@ -11,6 +11,8 @@ openai = "*"
 django-cors-headers = "*"
 markdown2 = '*'
 xhtml2pdf = '*'
+gunicorn = "*"
+whitenoise = "*"
 
 [dev-packages]
 
