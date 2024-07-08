@@ -36,7 +36,7 @@ SECRET_KEY = 'django-insecure-@8guaz85_8xl3uw&wf359no19tjom&_l93167(!jws#9te8d^#
 DEBUG = True
 
 ALLOWED_HOSTS = ['scriptly-105d4cc5ed46.herokuapp.com',
-                 'localhost', '127.0.0.1', '0.0.0.0', 'scriply-lena-zhangs-projects.vercel.app']
+                 'localhost', '127.0.0.1', '0.0.0.0']
 
 
 # Application definition
@@ -142,5 +142,27 @@ CORS_ALLOWED_ORIGINS = [
     "https://scriply-lena-zhangs-projects.vercel.app",
 ]
 
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
