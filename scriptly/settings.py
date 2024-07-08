@@ -36,7 +36,7 @@ SECRET_KEY = 'django-insecure-@8guaz85_8xl3uw&wf359no19tjom&_l93167(!jws#9te8d^#
 DEBUG = True
 
 ALLOWED_HOSTS = ['scriptly-105d4cc5ed46.herokuapp.com',
-                 'localhost', '127.0.0.1', '0.0.0.0']
+                 'localhost', '127.0.0.1', '0.0.0.0', 'blooming-waters-98716-6d10e8de5418.herokuapp.com']
 
 
 # Application definition
