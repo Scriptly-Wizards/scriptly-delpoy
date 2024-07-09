@@ -10,9 +10,7 @@ from xhtml2pdf import pisa
 from io import BytesIO
 from django.http import HttpResponse
 from django.template.loader import render_to_string
-
-last_conversation_content = {}
-
+from .models import PDFContent
 
 class VideoDataView(APIView):
     def post(self, request):
@@ -24,7 +22,16 @@ class VideoDataView(APIView):
                     serializer.generate_content())
                 # Cache content in a dictionary for future PDF export
                 if 'data' in response_data and 'value' in response_data['data']:
-                    last_conversation_content[assistant_service.thread.id] = response_data['data']['value']
+                    thread_id = assistant_service.thread.id
+                    content = response_data['data']['value']
+                    obj, created = PDFContent.objects.update_or_create(
+                        thread_id=thread_id,
+                        defaults={'content': content},
+                    )
+                    if created:
+                        print("created new PDFContent object.")
+                    else:
+                        print("updated existing PDFContent object.")
                 else:
                     print("Error: 'data' or 'value' not found in response_data")
                 return Response(response_data, status=status.HTTP_201_CREATED)
@@ -55,11 +62,11 @@ class GeneratePDFView(APIView):
         id = request.data.get('id', None)
         if id is None:
             return Response({"error": "Missing ID parameter"}, status=status.HTTP_400_BAD_REQUEST)
-
-        if id in last_conversation_content:
-            value_content = last_conversation_content[id]
-            json_string = {"value": value_content}
-        else:
+        
+        try:
+            pdf_content = PDFContent.objects.get(thread_id=id)
+            json_string = {"value": pdf_content.content}
+        except PDFContent.DoesNotExist:
             return Response({"error": "ID not found in conversation content"}, status=status.HTTP_404_NOT_FOUND)
 
         # 预处理内容
